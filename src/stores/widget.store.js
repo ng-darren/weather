@@ -1,39 +1,45 @@
 import { extendObservable } from 'mobx';
-import { widgetService } from '../services';
+import widgetService from '../services';
 
 export default class WidgetStore {
   constructor() {
     extendObservable(this, {
       title: '',
-      isCelsius: true,
-      isWindOn: true
+      isCelsius: 'true',
+      isWindOn: 'true',
+      lat: 0,
+      lng: 0,
+      report: {}
     });
 
-    navigator.geolocation.watchPosition(this.updateLocation, this.errorLocation);
+    navigator.geolocation.watchPosition(this.updateReport, this.errorLocation);
   }
 
   updateWidget(key, value) {
     this[key] = value;
+
+    if (key !== 'title') {
+      this.updateReport();
+    }
   }
 
-  updateLocation(res) {
-    console.log(res);
+  updateReport = (res) => {
+    if (res) {
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+    }
 
-    let lat = res.coords.latitude, lng = res.coords.longitude;
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng)
+    widgetService.fetchWeatherReport(this.lat, this.lng, this.isCelsius)
       .then(res => res.json())
       .then(
         (result) => {
           console.log(result);
+          this.report = result;
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           console.log(error);
         }
       )
-
   }
 
   errorLocation(err) {

@@ -5,6 +5,10 @@ import { observer, inject } from 'mobx-react';
 import '../App.css';
 
 class Editor extends Component {
+  componentWillMount() {
+
+  }
+
   handleChange = (event) => {
     const { widget } = this.props.stores;
     widget.updateWidget(event.target.name, event.target.value);
@@ -24,7 +28,7 @@ class Editor extends Component {
             <label>Temperature</label>
             <br />
             <div className="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="celsius" name="isCelsius" className="custom-control-input" value={true} onChange={this.handleChange} />
+              <input type="radio" id="celsius" name="isCelsius" className="custom-control-input" value={true} onChange={this.handleChange} defaultChecked />
               <label className="custom-control-label" htmlFor="celsius">&#8451;</label>
             </div>
             <div className="custom-control custom-radio custom-control-inline">
@@ -37,7 +41,7 @@ class Editor extends Component {
             <label>Wind</label>
             <br />
             <div className="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="on" name="isWindOn" className="custom-control-input" value={true} onChange={this.handleChange} />
+              <input type="radio" id="on" name="isWindOn" className="custom-control-input" value={true} onChange={this.handleChange} defaultChecked />
               <label className="custom-control-label" htmlFor="on">On</label>
             </div>
             <div className="custom-control custom-radio custom-control-inline">
