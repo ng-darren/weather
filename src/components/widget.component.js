@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button } from "react-bootstrap/lib";
+import { compose } from 'recompose';
+import { observable } from 'mobx';
+import { observer, inject } from 'mobx-react';
 
 import '../App.css';
 
@@ -12,17 +14,19 @@ class Widget extends Component {
 
 
   render() {
-    const { startMachine, disabled } = this.props;
+    const { title, isCelsius, isWindOn } = this.props.stores.widget;
 
     return (
       <div className="card" style={{width: '18rem', boxShadow: '3px 3px 8px #bbbbbb'}}>
         <div className="card-body">
-          <h5 className="card-title">Title of the Widget</h5>
-          <p className="card-text">lorem ipsum</p>
+          <strong className="card-title">{title? title  : 'Title of the Widget'}</strong>
+
+          <br />
+          isCelsius: {isCelsius}, isWindOn: {isWindOn}
         </div>
       </div>
     )
   }
 }
 
-export default Widget;
+export default compose(inject('stores'), observer)(Widget);

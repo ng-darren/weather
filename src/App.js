@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
+import { Provider } from 'mobx-react';
 import { Button } from 'react-bootstrap';
 
 import Editor from './components/editor.component'
 import Widget from './components/widget.component'
+import stores from './stores';
 
-
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <Provider stores={stores}>
+        <div className="App-header">
           <div className="container">
             <div className="row">
               <div className="col" style={{borderRight:'1px solid #cccccc', height:'300px'}}>
@@ -23,9 +23,8 @@ class App extends Component {
               </div>
             </div>
           </div>
-
-        </header>
-      </div>
+        </div>
+      </Provider>
     );
   }
 }
