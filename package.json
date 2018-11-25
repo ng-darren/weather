@@ -16,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "e2e": "jest src/App.e2e.test.js --watch --notify --config=jest.config.js --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -26,5 +27,14 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "expect-puppeteer": "^3.5.1",
+    "faker": "^4.1.0",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "puppeteer": "^1.10.0"
+  }
 }

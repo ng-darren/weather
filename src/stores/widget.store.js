@@ -9,7 +9,8 @@ export default class WidgetStore {
       isWindOn: 'true',
       lat: 0,
       lng: 0,
-      report: {}
+      report: {},
+      isError: ''
     });
 
     navigator.geolocation.watchPosition(this.updateReport, this.errorLocation);
@@ -24,26 +25,26 @@ export default class WidgetStore {
   }
 
   updateReport = (res) => {
-    console.log(res);
     if (res) {
       this.lat = res.coords.latitude;
       this.lng = res.coords.longitude;
     }
 
+    this.isError = '';
+
     widgetService.fetchWeatherReport(this.lat, this.lng, this.isCelsius)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           this.report = result;
         },
         (error) => {
-          console.log(error);
+          this.isError = 'Failed to fetch weather report.';
         }
       )
   }
 
   errorLocation(err) {
-    console.log(err);
+    this.isError = 'Error in getting location.';
   }
 }

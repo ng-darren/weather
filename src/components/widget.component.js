@@ -45,7 +45,7 @@ class Widget extends Component {
   }
 
   render() {
-    const { title, isCelsius, isWindOn, report } = this.props.stores.widget;
+    const { title, isCelsius, isWindOn, report, isError } = this.props.stores.widget;
 
     return (
       <div className="card" style={{boxShadow: '3px 3px 8px #bbbbbb'}}>
@@ -56,6 +56,13 @@ class Widget extends Component {
                 <strong className="title">{title? title  : 'TITLE OF WIDGET'}</strong>
               </div>
             </div>
+            {isError && <div className="row">
+              <div className="col">
+                <div className="alert alert-danger" role="alert">
+                  {isError}
+                </div>
+              </div>
+            </div>}
             <div className="row">
               <div className="col">
               {report.weather && <img src={this.getIcon(report.weather[0].id)} alt="Sunny" style={{maxWidth: '100%'}}/> }
