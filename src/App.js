@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Provider } from 'mobx-react';
+import { Button } from 'react-bootstrap';
+
+import Editor from './components/editor.component'
+import Widget from './components/widget.component'
+import stores from './stores';
+
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider stores={stores}>
+        <div className="App-header">
+          <div className="container">
+            <div className="row">
+              <div className="col" style={{borderRight:'1px solid #cccccc', height:'300px'}}>
+                <Editor />
+              </div>
+              <div className="col">
+                <Widget />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Provider>
     );
   }
 }
