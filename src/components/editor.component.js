@@ -5,10 +5,6 @@ import { observer, inject } from 'mobx-react';
 import '../App.css';
 
 class Editor extends Component {
-  componentWillMount() {
-
-  }
-
   handleChange = (event) => {
     const { widget } = this.props.stores;
     widget.updateWidget(event.target.name, event.target.value);

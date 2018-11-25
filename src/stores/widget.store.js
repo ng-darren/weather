@@ -24,6 +24,7 @@ export default class WidgetStore {
   }
 
   updateReport = (res) => {
+    console.log(res);
     if (res) {
       this.lat = res.coords.latitude;
       this.lng = res.coords.longitude;
